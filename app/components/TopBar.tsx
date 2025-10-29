@@ -2,7 +2,7 @@ import { IconButton, Flex } from "@radix-ui/themes";
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
 import { ThemeChanger } from "./ThemeChanger";
 
-// Telegram 图标使用 CDN SVG，免导入文件
+// Telegram 图标 CDN
 const TELEGRAM_ICON =
   "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg";
 
@@ -26,6 +26,8 @@ export function TopBar({ onInboxOpen }: TopBarProps) {
         right: 0,
         zIndex: 1000,
         backdropFilter: "blur(8px)",
+        backgroundColor: "rgba(255, 255, 255, 0.05)",
+        WebkitBackdropFilter: "blur(8px)",
       }}
     >
       <Flex gap="6" align="center">
@@ -47,6 +49,23 @@ export function TopBar({ onInboxOpen }: TopBarProps) {
           onClick={() =>
             window.open("https://t.me/worldstarshare", "_blank")
           }
+          style={{
+            transition: "transform 0.25s ease, filter 0.25s ease, box-shadow 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            const target = e.currentTarget.querySelector("img");
+            if (target) {
+              target.style.transform = "scale(1.2)";
+              target.style.filter = "drop-shadow(0 0 6px #2AABEE)";
+            }
+          }}
+          onMouseLeave={(e) => {
+            const target = e.currentTarget.querySelector("img");
+            if (target) {
+              target.style.transform = "scale(1)";
+              target.style.filter = "invert(0.8)";
+            }
+          }}
         >
           <img
             src={TELEGRAM_ICON}
@@ -55,11 +74,12 @@ export function TopBar({ onInboxOpen }: TopBarProps) {
             height={ICON_SIZE}
             style={{
               filter: "invert(0.8)",
+              transition: "transform 0.25s ease, filter 0.25s ease",
             }}
           />
         </IconButton>
 
-        {/* 主题切换按钮 */}
+        {/* 主题切换 */}
         <ThemeChanger iconSize={ICON_SIZE} />
       </Flex>
     </Flex>
