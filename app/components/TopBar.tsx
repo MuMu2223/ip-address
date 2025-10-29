@@ -2,7 +2,6 @@ import { IconButton, Flex } from "@radix-ui/themes";
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
 import { ThemeChanger } from "./ThemeChanger";
 
-// Telegram 图标 CDN
 const TELEGRAM_ICON =
   "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg";
 
@@ -50,20 +49,21 @@ export function TopBar({ onInboxOpen }: TopBarProps) {
             window.open("https://t.me/worldstarshare", "_blank")
           }
           style={{
-            transition: "transform 0.25s ease, filter 0.25s ease, box-shadow 0.3s ease",
+            transition:
+              "transform 0.25s ease, filter 0.25s ease, box-shadow 0.3s ease",
           }}
           onMouseEnter={(e) => {
             const target = e.currentTarget.querySelector("img");
             if (target) {
               target.style.transform = "scale(1.2)";
-              target.style.filter = "drop-shadow(0 0 6px #2AABEE)";
+              target.style.filter = "drop-shadow(0 0 8px #2AABEE)";
             }
           }}
           onMouseLeave={(e) => {
             const target = e.currentTarget.querySelector("img");
             if (target) {
               target.style.transform = "scale(1)";
-              target.style.filter = "invert(0.8)";
+              target.style.filter = "none";
             }
           }}
         >
@@ -73,8 +73,15 @@ export function TopBar({ onInboxOpen }: TopBarProps) {
             width={ICON_SIZE}
             height={ICON_SIZE}
             style={{
-              filter: "invert(0.8)",
               transition: "transform 0.25s ease, filter 0.25s ease",
+              filter: "none",
+              // 让图标默认是品牌蓝色
+              fill: "#2AABEE",
+              color: "#2AABEE",
+              // 为防止某些浏览器忽略 fill，可以包裹在蓝色圆底中
+              backgroundColor: "#2AABEE20",
+              borderRadius: "50%",
+              padding: "4px",
             }}
           />
         </IconButton>
